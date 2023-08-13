@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e716b5d29f76484c883b4becd855221a" Name="Diagram1">
+        <EntityTypeShape EntityType="PersonalAccounting_DBModel.CostOrIncome" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PersonalAccounting_DBModel.CostOrIncomeType" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PersonalAccounting_DBModel.User" Width="1.5" PointX="4.5" PointY="0.5" />
+        <AssociationConnector Association="PersonalAccounting_DBModel.FK_CostOrIncome_CostOrIncomeType" />
+        <AssociationConnector Association="PersonalAccounting_DBModel.FK_CostOrIncome_CostTypeOrIncomeType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

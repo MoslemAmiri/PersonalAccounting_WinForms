@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PersonalAccounting_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EfContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CostOrIncomes" EntityType="PersonalAccounting_DBModel.CostOrIncome" />
+    <EntitySet Name="CostOrIncomeTypes" EntityType="PersonalAccounting_DBModel.CostOrIncomeType" />
+    <EntitySet Name="Users" EntityType="PersonalAccounting_DBModel.User" />
+    <AssociationSet Name="FK_CostOrIncome_CostOrIncomeType" Association="PersonalAccounting_DBModel.FK_CostOrIncome_CostOrIncomeType">
+      <End Role="CostOrIncomeType" EntitySet="CostOrIncomeTypes" />
+      <End Role="CostOrIncome" EntitySet="CostOrIncomes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CostOrIncome_CostTypeOrIncomeType" Association="PersonalAccounting_DBModel.FK_CostOrIncome_CostTypeOrIncomeType">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CostOrIncome" EntitySet="CostOrIncomes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CostOrIncome">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CostOrIncomeTypeId" Type="Int64" Nullable="false" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <Property Name="Date" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IsRemoved" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CostOrIncomeType" Relationship="PersonalAccounting_DBModel.FK_CostOrIncome_CostOrIncomeType" FromRole="CostOrIncome" ToRole="CostOrIncomeType" />
+    <NavigationProperty Name="User" Relationship="PersonalAccounting_DBModel.FK_CostOrIncome_CostTypeOrIncomeType" FromRole="CostOrIncome" ToRole="User" />
+  </EntityType>
+  <EntityType Name="CostOrIncomeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <Property Name="CreationDate" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CostOrIncomes" Relationship="PersonalAccounting_DBModel.FK_CostOrIncome_CostOrIncomeType" FromRole="CostOrIncomeType" ToRole="CostOrIncome" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Byte" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CostOrIncomes" Relationship="PersonalAccounting_DBModel.FK_CostOrIncome_CostTypeOrIncomeType" FromRole="User" ToRole="CostOrIncome" />
+  </EntityType>
+  <Association Name="FK_CostOrIncome_CostOrIncomeType">
+    <End Type="PersonalAccounting_DBModel.CostOrIncomeType" Role="CostOrIncomeType" Multiplicity="1" />
+    <End Type="PersonalAccounting_DBModel.CostOrIncome" Role="CostOrIncome" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CostOrIncomeType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CostOrIncome">
+        <PropertyRef Name="CostOrIncomeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CostOrIncome_CostTypeOrIncomeType">
+    <End Type="PersonalAccounting_DBModel.User" Role="User" Multiplicity="1" />
+    <End Type="PersonalAccounting_DBModel.CostOrIncome" Role="CostOrIncome" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CostOrIncome">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PersonalAccounting_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CostOrIncome">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CostOrIncomeTypeId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Time" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="IsRemoved" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CostOrIncomeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="CreationDate" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Role" Type="tinyint" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="11" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="CreationDate" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="IsBlock" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CostOrIncome_CostOrIncomeType">
+    <End Role="CostOrIncomeType" Type="Self.CostOrIncomeType" Multiplicity="1" />
+    <End Role="CostOrIncome" Type="Self.CostOrIncome" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CostOrIncomeType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CostOrIncome">
+        <PropertyRef Name="CostOrIncomeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CostOrIncome_CostTypeOrIncomeType">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="CostOrIncome" Type="Self.CostOrIncome" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CostOrIncome">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PersonalAccounting_DBModelStoreContainer">
+    <EntitySet Name="CostOrIncome" EntityType="Self.CostOrIncome" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CostOrIncomeType" EntityType="Self.CostOrIncomeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CostOrIncome_CostOrIncomeType" Association="Self.FK_CostOrIncome_CostOrIncomeType">
+      <End Role="CostOrIncomeType" EntitySet="CostOrIncomeType" />
+      <End Role="CostOrIncome" EntitySet="CostOrIncome" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CostOrIncome_CostTypeOrIncomeType" Association="Self.FK_CostOrIncome_CostTypeOrIncomeType">
+      <End Role="User" EntitySet="User" />
+      <End Role="CostOrIncome" EntitySet="CostOrIncome" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,6 @@
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\bin\Debug\Accounting.ViewModels.dll
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\bin\Debug\Accounting.ViewModels.pdb
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\obj\Debug\Accounting.ViewModels.csproj.AssemblyReference.cache
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\obj\Debug\Accounting.ViewModels.csproj.CoreCompileInputs.cache
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\obj\Debug\Accounting.ViewModels.dll
+D:\01_PersonalProjects\07_PersonalAccountingSoftware\PersonalAccountingSoftware\Accounting.ViewModels\obj\Debug\Accounting.ViewModels.pdb
